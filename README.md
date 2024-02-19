@@ -11,13 +11,13 @@ https://public.tableau.com/app/profile/sergej.charkavliuk/vizzes
 
 # Google Colab Python projects
 
-Here you can find some project that I did with Google Colab:
+Here you can find some projects that I did with Python in Google Colab:
 
 https://drive.google.com/file/d/12uYhKGEP8v_rmbH8jPd0BV-12Zu9aJSA/view?usp=sharing  <- Marketing Analyst
 
-https://drive.google.com/file/d/1DPbOUV8bya_4ozvcNRaqpxZxGPBOlgeB/view?usp=sharing  <- Product Analyst 
+https://drive.google.com/file/d/1DPbOUV8bya_4ozvcNRaqpxZxGPBOlgeB/view?usp=sharing  <- Product Analyst
 
 https://drive.google.com/file/d/1GWU5CdpAs4xnRDggrPnfJsSZXakt32wj/view?usp=sharing  <- Logistic Regression
 
-https://drive.google.com/file/d/1dG91vt_JXqEnJNjkG3uOZfIsfV0JjudS/view?usp=sharing  <- Risk Analyst 
+https://drive.google.com/file/d/1dG91vt_JXqEnJNjkG3uOZfIsfV0JjudS/view?usp=sharing  <- Risk Analyst
 
