@@ -9,3 +9,15 @@ Thank you for taking the time to visit. I hope you find my projects insightful a
 
 https://public.tableau.com/app/profile/sergej.charkavliuk/vizzes
 
+# Google Colab Python projects
+
+Here you can find some project that I did with Google Colab:
+
+https://drive.google.com/file/d/12uYhKGEP8v_rmbH8jPd0BV-12Zu9aJSA/view?usp=sharing  <- Marketing Analyst
+
+https://drive.google.com/file/d/1DPbOUV8bya_4ozvcNRaqpxZxGPBOlgeB/view?usp=sharing  <- Product Analyst 
+
+https://drive.google.com/file/d/1GWU5CdpAs4xnRDggrPnfJsSZXakt32wj/view?usp=sharing  <- Logistic Regression
+
+https://drive.google.com/file/d/1dG91vt_JXqEnJNjkG3uOZfIsfV0JjudS/view?usp=sharing  <- Risk Analyst 
+
