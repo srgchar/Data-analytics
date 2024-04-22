@@ -21,3 +21,5 @@ https://drive.google.com/file/d/1GWU5CdpAs4xnRDggrPnfJsSZXakt32wj/view?usp=shari
 
 https://drive.google.com/file/d/1dG91vt_JXqEnJNjkG3uOZfIsfV0JjudS/view?usp=sharing  <- Risk Analyst
 
+https://github.com/srgchar/Data-analytics/blob/main/Capstone_code.py <- Capstone A/B Testing Code
+
