@@ -1,43 +1,51 @@
 import pandas as pd
-from scipy.stats import mannwhitneyu
+from scipy.stats import chi2_contingency
 
 # Open the csv file
 accidents = pd.read_csv('/Users/sergej/Desktop/Turing/Capstone/US_Accidents_March23.csv')
 
 # Create a list of states of interest
-states_of_interest = ['CA', 'TX', 'FL', 'NY', 'PA', 'NC', 'NJ', 'VA', 'TN', 'MN', 'SC', 'AR']
+states_of_interest = ['CA', 'TX', 'FL', 'NY', 'PA', 'NC', 'NJ', 'VA', 'TN', 'MN', 'SC', 'AZ']
 
 # Filter the period of time and states from the general file
-accidents = accidents[(accidents['Start_Time'] >= '2022-01-01') & (accidents['Start_Time'] <= '2022-12-31')]
-accidents = accidents[accidents['State'].isin(states_of_interest)]
-
-# Selecting only "State" and "ID" columns
-accidents = accidents[["State", "ID"]]
+accidents_filtered = accidents[(accidents['Start_Time'] >= '2022-01-01') & (accidents['Start_Time'] <= '2022-12-31')]
+accidents_filtered = accidents_filtered[accidents_filtered['State'].isin(states_of_interest)]
 
 # Group by "State" and count accidents
-accidents = accidents.groupby("State").count()
+accidents_count = accidents_filtered.groupby("State").size().reset_index(name='number_of_accidents')
 
 # Add population of the states
-accidents['Population'] = [3046404, 39040616, 22245521, 5714300, 10695965, 9260817, 19673200, 12972091, 5282955, 7048976, 30029848, 8679099]
+population_data = {
+    'CA': 39040616, 'TX': 39040616, 'FL': 22245521, 'NY': 19673200, 'PA': 12972091,
+    'NC': 10695965, 'NJ': 9260817, 'VA': 8679099, 'TN': 7048976, 'MN': 5714300,
+    'SC': 5282955, 'AZ': 7365684}
 
-# Iterate over each state
-for state in states_of_interest:
-    # Select data for the current state
-    state_data = accidents.loc[state]
+accidents_count['population_data'] = accidents_count['State'].map(population_data)
 
-    # Perform A/B testing with other states
-    for other_state in states_of_interest:
-        if other_state != state:  # Skip comparing with itself
-            other_state_data = accidents.loc[other_state]
+# Calculate accident rates
+accidents_count['accident_rate'] = accidents_count['number_of_accidents'] / accidents_count['population_data']
 
-            # Perform Mann-Whitney U test
-            statistic, p_value = mannwhitneyu(state_data['ID'], other_state_data['ID'])
+# Iterate over each pair of states
+for i in range(len(states_of_interest)):
+    for j in range(i+1, len(states_of_interest)):
+        state1 = states_of_interest[i]
+        state2 = states_of_interest[j]
 
-            # Print results
-            print(f"A/B testing between {state} and {other_state}:")
-            print(f"  - Mann-Whitney U statistic: {statistic}")
-            print(f"  - p-value: {p_value}")
-            if p_value < 0.05 or p_value > 0.975:
-                print("  - Significant difference (p < 0.025 or p > 0.975)")
-            else:
-                print("  - Not significant difference (0.025 <= p <= 0.975)")
+        # Extract data for the two states
+        data_state1 = accidents_count[accidents_count['State'] == state1][['number_of_accidents', 'population_data']].values.flatten()
+        data_state2 = accidents_count[accidents_count['State'] == state2][['number_of_accidents', 'population_data']].values.flatten()
+
+        # Set up the contingency table
+        contingency_table = [data_state1, data_state2]
+
+        # Perform chi-square test
+        chi2_stat, p_val, dof, expected = chi2_contingency(contingency_table)
+
+        # Show results
+        print(f"Chi-square statistic for comparing {state1} and {state2}: {chi2_stat}")
+        print(f"P-value: {p_val}")
+        if p_val < 0.05:
+            print("There is a significant difference in accident rates between states.")
+        else:
+            print("There is no significant difference in accident rates between states.")
+        print()
